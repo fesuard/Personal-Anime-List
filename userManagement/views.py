@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -20,7 +19,8 @@ class UserCreateView(CreateView):
         new_user.first_name = new_user.first_name.lower()
         new_user.last_name = new_user.last_name.lower()
         new_user.nickname = new_user.nickname.title()
-
+        # pentru a salva username-ul cu email-ul, did moment ce nu le cerem separat username
+        new_user.username = new_user.email
 
         new_user.save()
         return redirect('login')
