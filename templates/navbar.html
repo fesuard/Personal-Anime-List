@@ -42,12 +42,15 @@
             {% endif %}
       
             {% if user.is_staff %}
-            <li class="nav-item">
-               <a class="nav-link" style="color: white" href="{% url "create-anime" %}">Create anime</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="color: white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Manage Anime
+              </a>
+              <ul class="dropdown-menu" style="background-color: #2b3034;">
+                <li><a class="dropdown-item" style="color: white" href="#">Add anime</a></li>
+                <li><a class="dropdown-item" style="color: white" href="#">Delete anime</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-               <a class="nav-link" style="color: white" href="#">Delete anime</a>
-            </li>    
             {% endif %}
             
       </ul>
@@ -59,7 +62,7 @@
             {% else %}
                 <div style="background-color: #6f2cf5">
                 <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a>
-                <a href="{% url 'create-user' %}" class="btn btn-outline-light">Sign up</a>
+                <a href="{% url 'create-user' %}" class="btn btn-outline-light" style="margin-right: 7px">Sign up</a>
             </div>
             {% endif %}
       <form class="d-flex" role="search">

@@ -12,7 +12,6 @@ class AuthenticationNewForm(AuthenticationForm):
             'password'
         ]
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # username_field: django.contrib.auth.forms.UsernameField = self.fields['username']

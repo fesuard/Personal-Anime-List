@@ -24,7 +24,6 @@ from userManagement.forms import AuthenticationNewForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
     path('', include('userManagement.urls')),
     path('', include('animeList.urls')),
     path('login/', views.LoginView.as_view(form_class=AuthenticationNewForm), name='login'),
