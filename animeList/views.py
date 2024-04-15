@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView, TemplateView, ListView
-from animeList.models import Anime
+from animeList.models import Anime, Tag
 from animeList.forms import AddAnimeForm, UpdateAnimeForm
 from django.db import connection
 from django.shortcuts import render
@@ -23,8 +23,12 @@ def home_view(request):
     all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life'])
     obj_to_select = 4
     random_anime = random.sample(list(all_animes), obj_to_select)
+    random_tag = []
+    for anime in random_anime:
+        random_tag.append([Tag.objects.filter(anime__title=anime)])
     context = {
-        'random_anime': random_anime
+        'random_anime': random_anime,
+        'random_tag': random_tag
     }
     return render(request, 'animeList/homepage.html', context)
 

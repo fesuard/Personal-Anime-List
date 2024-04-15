@@ -57,7 +57,7 @@
             {% if user.is_authenticated %}
                 <form method="post" action="{% url "logout" %}">
                 {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-light">Logout, {{ user.email }}</button>
+                    <button type="submit" class="btn btn-outline-light" style="margin-right:7px">Logout, {{ user.email }}</button>
                 </form>
             {% else %}
                 <div style="background-color: #6f2cf5">

@@ -14,3 +14,10 @@
 /*    color: white;*/
 /*}*/
 
+/* pentru ca titlul cardurilor cu numele anime-urilor sa nu se duca mai multe de un rand */
+.custom_card_title {
+    height: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
