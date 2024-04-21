@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} Home {% endblock %}
 {% block content %}
     <div class="container">
@@ -11,20 +12,37 @@
                     {% for anime in random_anime %}
                         <div class="col-md-6">
                             <div class="card" style="width: 18rem;">
-                              <img src="{{ anime.picture }}" class="card-img-top" style="width: 286px; height: 360px" alt="anime pic">
-                              <div class="card-body">
-                                <h5 class="card-title custom_card_title">{{ anime.title}}</h5>
-                                <p class="card-text"> {{ anime_id }} </p>
-                              </div>
-                              <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                              </ul>
-                              <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                              </div>
+                                <img src="{{ anime.picture }}" class="card-img-top" style="width: 286px; height: 360px"
+                                     alt="anime pic">
+                                <div class="card-body">
+                                    <h5 title="{{ anime.title }}"
+                                        class="card-title custom_card_title">{{ anime.title }}</h5>
+                                    <p class="card-text"> Tags: </p>
+                                    <ul class="limited_list">
+                                        {% for tag in anime.tags.all %}
+                                            {% if forloop.counter0 < 4 %}
+                                                <li>{{ tag }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <p>
+                                        {% if anime.tags.count > 4 %}
+                                            {{ anime.tags.count|add:-4 }}
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                        tags remaining
+                                    </p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">An item</li>
+                                    <li class="list-group-item">A second item</li>
+                                    <li class="list-group-item">A third item</li>
+                                </ul>
+                                <div class="card-body">
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
                             </div>
                             <br>
                         </div>

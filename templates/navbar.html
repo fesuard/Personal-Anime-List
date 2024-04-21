@@ -65,8 +65,8 @@
                 <a href="{% url 'create-user' %}" class="btn btn-outline-light" style="margin-right: 7px">Sign up</a>
             </div>
             {% endif %}
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search anime" aria-label="Search">
+      <form method="GET" class="d-flex" role="search" action="{% url 'search-result' %}">
+        <input class="form-control me-2" type="search" placeholder="Search anime name" aria-label="Search" name="anime_title" value="{{ q }}">
         <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
     </div>

@@ -13,3 +13,4 @@ class UpdateAnimeForm(forms.ModelForm):
         model = Anime
         fields = '__all__'
 
+

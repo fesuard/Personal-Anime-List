@@ -21,3 +21,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.limited_list {
+    /* Limit to 4 lines */
+    overflow: hidden;
+    height: 6em; /* Adjust line height based on font size */
+    line-height: 1.5em;
+    position: relative; /* Needed for absolute positioning */
+
+}
+
+legend {
+    font-size: 16px !important;
+}
