@@ -115,7 +115,19 @@ class UpdateUserAnimeView(UpdateView):
     model = UserAnime
     form_class = UserAnimeForm
     template_name = 'animeList/user_anime_update.html'
+
     # success_url = reverse_lazy('home-page')
 
     def get_success_url(self):
         return self.request.META['HTTP_REFERER']
+
+
+class AnimeUserListView(ListView):
+    model = UserAnime
+    template_name = 'animeList/anime_user_list_view.html'
+    context_object_name = 'anime_user'
+
+    def get_queryset(self):
+        user = self.request.user
+        return UserAnime.objects.filter(user=user.id)
+

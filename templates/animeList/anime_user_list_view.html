@@ -6,21 +6,20 @@
         <div class="row">
             <div class="col-md-6 col-12">
                 <br><br>
-                <h3 style="text-align: center">Search result</h3>
+                <h3 style="text-align: center">{{ user.first_name }}'s List</h3>
                 <br><br>
                 <div class="row">
-                    {% for anime in all_anime %}
+                    {% for anime in anime_user %}
                         <div class="col-md-6 col-12">
                             <div class="card col-12">
-                                <img src="{{ anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"
+                                <img src="{{ anime.anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"
                                      alt="anime pic">
                                 <div class="card-body">
-{#                                   for the hidden title to display fully when you hover over it#}
-                                    <h5 title="{{ anime.title }}"
-                                        class="card-title custom_card_title">{{ anime.title }}</h5>
+                                    <h5 title="{{ anime.anime.title }}"
+                                        class="card-title custom_card_title">{{ anime.anime.title }}</h5>
                                     <p class="card-text"> Tags: </p>
                                     <ul class="limited_list">
-                                        {% for tag in anime.tags.all %}
+                                        {% for tag in anime.anime.tags.all %}
                                             {% if forloop.counter0 < 4 %}
                                                 <li>{{ tag }}</li>
                                             {% endif %}
@@ -36,12 +35,12 @@
                                     </p>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{ anime.status }}</li>
-                                    <li class="list-group-item">{{ anime.year }} {{ anime.season }}</li>
-                                    <li class="list-group-item">A third item</li>
+                                    <li class="list-group-item">{{ anime.anime.status }}</li>
+                                    <li class="list-group-item">{{ anime.anime.year }} {{ anime.anime.season }}</li>
+                                    <li class="list-group-item">Your score: {{ anime.get_score_display }}</li>
                                 </ul>
                                 <div class="card-body">
-                                    <a href="{% url 'details-anime' anime.id %}" class="card-link">Add anime</a>
+                                    <a href="{% url 'details-anime' anime.anime_id %}" class="card-link">Change anime</a>
                                     <a href="#" class="card-link">Another link</a>
                                 </div>
                             </div>
@@ -49,16 +48,6 @@
                         </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="col-md-6">
-                <br><br>
-                <h3 style="text-align: center"> Advanced Filters </h3>
-                <br><br>
-                <form method="get" class="col-12">
-                    {{ filters }}
-                    <button type="submit">Search</button>
-                </form>
-                <br><br>
             </div>
         </div>
     </div>
