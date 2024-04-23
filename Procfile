@@ -1,1 +1,1 @@
-web: gunicorn pal.wsgiq
+web: gunicorn pal.wsgi
