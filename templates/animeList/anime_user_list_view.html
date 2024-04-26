@@ -68,7 +68,15 @@
                                 <td>{{ anime.anime.type }}</td>
                                 <td>{{ anime.eps_seen }}</td>
                                 <td>{{ anime.watch_status }}</td>
-                                <td>Show all tags</td>
+                                <td class="tags-cell">
+                                    {% for tag in anime.anime.tags.all %}
+                                        <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a>,</span>
+                                    {% endfor %}
+                                    <button class="show-all-btn">Show All</button>
+                                    <br>
+                                    <button class="hide-btn" style="display: none;">Hide</button>
+
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
