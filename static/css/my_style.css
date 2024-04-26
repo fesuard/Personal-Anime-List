@@ -38,3 +38,16 @@ legend {
 .navbar .nav-item .dropdown-item:hover {
     background-color: #6f2cf5;
 }
+
+.anime_list_row {
+    max-width: 150px; /* Adjust the maximum width as needed */
+    overflow: hidden; /* Hide any overflowing content */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    text-overflow: ellipsis; /* Add ellipsis (...) to indicate that content is clipped */
+    cursor: pointer;
+}
+
+.anime_list_row:hover {
+    white-space: normal;
+    text-overflow: initial;
+}

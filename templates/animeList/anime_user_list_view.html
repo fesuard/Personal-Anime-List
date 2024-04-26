@@ -54,13 +54,21 @@
                             <th scope="col">Score</th>
                             <th scope="col">Type</th>
                             <th scope="col">Progress</th>
+                            <th scope="col">Status</th>
                             <th scope="col">View tags</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
                         {% for anime in anime_user %}
                             <tr>
-                                <th scope="row">{{ anime.id }}</th>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><img src="{{ anime.anime.thumbnail }}" alt="anime pic" width=57></td>
+                                <td class="anime_list_row" title="{{ anime.anime.title }}">{{ anime.anime.title }}</td>
+                                <td>{{ anime.get_score_display }}</td>
+                                <td>{{ anime.anime.type }}</td>
+                                <td>{{ anime.eps_seen }}</td>
+                                <td>{{ anime.watch_status }}</td>
+                                <td>Show all tags</td>
                             </tr>
                         {% endfor %}
                         </tbody>
