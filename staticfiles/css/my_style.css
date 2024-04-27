@@ -1,0 +1,53 @@
+.errorlist{
+    color:red;
+    list-style-type: none;
+}
+
+/*div {*/
+/*    background-color: #2b3034;*/
+/*    !*color: white;*!*/
+/*}*/
+
+
+
+/*body {*/
+/*    color: white;*/
+/*}*/
+
+/* pentru ca titlul cardurilor cu numele anime-urilor sa nu se duca mai multe de un rand */
+.custom_card_title {
+    height: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.limited_list {
+    /* Limit to 4 lines */
+    overflow: hidden;
+    height: 6em; /* Adjust line height based on font size */
+    line-height: 1.5em;
+    position: relative; /* Needed for absolute positioning */
+
+}
+
+legend {
+    font-size: 16px !important;
+}
+
+.navbar .nav-item .dropdown-item:hover {
+    background-color: #6f2cf5;
+}
+
+.anime_list_row {
+    max-width: 150px; /* Adjust the maximum width as needed */
+    overflow: hidden; /* Hide any overflowing content */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    text-overflow: ellipsis; /* Add ellipsis (...) to indicate that content is clipped */
+    cursor: pointer;
+}
+
+.anime_list_row:hover {
+    white-space: normal;
+    text-overflow: initial;
+}
