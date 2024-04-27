@@ -56,30 +56,40 @@
                             <th scope="col">Progress</th>
                             <th scope="col">Status</th>
                             <th scope="col">View tags</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                        {% for anime in anime_user %}
+                        {% for user_anime in user_anime_list %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
-                                <td><img src="{{ anime.anime.thumbnail }}" alt="anime pic" width=57></td>
-                                <td class="anime_list_row" title="{{ anime.anime.title }}">{{ anime.anime.title }}</td>
-                                <td>{{ anime.get_score_display }}</td>
-                                <td>{{ anime.anime.type }}</td>
-                                <td>{{ anime.eps_seen }}</td>
-                                <td>{{ anime.watch_status }}</td>
+                                <td><img src="{{ user_anime.anime.thumbnail }}" alt="anime pic" width=57></td>
+                                <td class="anime_list_row" title="{{ user_anime.anime.title }}">{{ user_anime.anime.title }}</td>
+                                <td>{{ user_anime.get_score_display }}</td>
+                                <td>{{ user_anime.anime.type }}</td>
+                                <td>{{ user_anime.eps_seen }} / {{ user_anime.anime.episodes }}</td>
+                                <td>{{ user_anime.watch_status }}</td>
                                 <td class="tags-cell">
-                                    {% for tag in anime.anime.tags.all %}
+                                    {% for tag in user_anime.anime.tags.all %}
                                         <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a>,</span>
                                     {% endfor %}
-                                    <button class="show-all-btn">Show All</button>
+                                    <button class="show-all-btn">Show All Tags</button>
                                     <br>
                                     <button class="hide-btn" style="display: none;">Hide</button>
-
+                                    
                                 </td>
+                                <td> <a href="{% url 'anime-update-list' user_anime.id %}">Edit anime</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
                             </tr>
                         {% endfor %}
                         </tbody>
+                        <tfoot>
+{#                            <tr>#}
+{#                                <td><a href="{% url 'anime-update-list' anime.id %}" class="btn btn-primary">Update</a></td>#}
+{#                            </tr>#}
+                        </tfoot>
                     </table>
                 </div>
             </div>

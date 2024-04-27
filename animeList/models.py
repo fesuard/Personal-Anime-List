@@ -44,6 +44,9 @@ class Anime(models.Model):
     def __str__(self):
         return self.title
 
+    def get_user_anime(self):
+        return UserAnime.objects.filter(anime=self)
+
 
 class UserAnime(models.Model):
     SCORE = [

@@ -1,0 +1,42 @@
+<div class="col-md-6 col-12">
+    <div class="card col-12">
+        <img src="{{ anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"
+             alt="anime pic">
+        <div class="card-body">
+            {#                                   for the hidden title to display fully when you hover over it#}
+            <h5 title="{{ anime.title }}"
+                class="card-title custom_card_title">{{ anime.title }}</h5>
+            <p class="card-text"> Tags: </p>
+            <ul class="limited_list">
+                {% for tag in anime.tags.all %}
+                    {% if forloop.counter0 < 4 %}
+                        <li>{{ tag }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <p>
+                {% if anime.tags.count > 4 %}
+                    {{ anime.tags.count|add:-4 }}
+                {% else %}
+                    No
+                {% endif %}
+                tags remaining
+            </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ anime.status }}</li>
+            <li class="list-group-item">{{ anime.year }} {{ anime.season }}</li>
+            {% for user_anime in anime.get_user_anime %}
+                {% if request.user == user_anime.user %}
+                    <li class="list-group-item">{{ user_anime.eps_seen }} / {{ anime.episodes }}</li>
+                    <li class="list-group-item">{{ user_anime.watch_status }}</li>
+                    <li class="list-group-item">{{ user_anime.score }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="card-body">
+            <a href="{% url 'details-anime' anime.id %}" class="card-link">Add anime</a>
+        </div>
+    </div>
+    <br>
+</div>

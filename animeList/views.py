@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
 from animeList.models import Anime, Tag, UserAnime
-from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm
+from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm, UserAnimeUpdateForm
 from django.db import connection
 from django.shortcuts import render
 import random
@@ -25,6 +25,7 @@ def home_view(request):
     all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life'])
     obj_to_select = 4
     random_anime = random.sample(list(all_animes), obj_to_select)
+    all_grades = UserAnime.objects
     # tags = Tag.objects.filter(anime__in=random_anime)
     # anime_tags = []
     # for anime in random_anime:
@@ -125,9 +126,40 @@ class UpdateUserAnimeView(UpdateView):
 class AnimeUserListView(ListView):
     model = UserAnime
     template_name = 'animeList/anime_user_list_view.html'
-    context_object_name = 'anime_user'
+    context_object_name = 'user_anime_list'
 
     def get_queryset(self):
         user = self.request.user
         return UserAnime.objects.filter(user=user.id)
 
+
+class AnimeUserUpdateView(UpdateView):
+    model = UserAnime
+    template_name = 'animeList/user_anime_update_view.html'
+    form_class = UserAnimeUpdateForm
+    success_url = reverse_lazy('anime-list')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # : UserAnime s-a folosit ca sa specificam clasa, ca sa iti faca autofill (ex linia 149)
+        user_anime: UserAnime = self.object
+        form.fields['eps_seen'].widget.attrs.update(
+            {'class': 'form-control', 'min': '0', 'max': f'{user_anime.anime.episodes}'})
+        return form
+
+
+def stats_view(request):
+    user = request.user
+    scores = {}
+    for i in range(1, 11):
+        scores_grade = UserAnime.objects.filter(user=user, score=i).count()
+        scores.update({f'{i}': scores_grade})
+    tags = UserAnime.objects.filter(user=user).values('anime__tags')
+    statuses = UserAnime.objects.filter(user=user).values('watch_status')
+    context = {
+        'scores': scores,
+        'tags': tags,
+        'statuses': statuses,
+    }
+
+    return render(request, 'animeList/stats.html', context)

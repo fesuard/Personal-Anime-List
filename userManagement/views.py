@@ -24,3 +24,4 @@ class UserCreateView(CreateView):
 
         new_user.save()
         return redirect('login')
+
