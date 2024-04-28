@@ -51,7 +51,8 @@ def home_view(request):
         score_list = []
         for score in scores:
             score_list.append(score['score'])
-        avg_score = round(sum(score_list) / len(score_list), 2)
+        avg_score = sum(score_list) / len(score_list)
+        rounded_avg_score = round(avg_score, 2)
         animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
         animes_in_user_list_id = []
         for anime in animes_in_user_list:
@@ -61,7 +62,7 @@ def home_view(request):
         context = {
             'random_anime': random_anime,
             'random_fact': random_fact,
-            'soft_stats': [number_rated_anime, avg_score]
+            'soft_stats': [number_rated_anime, rounded_avg_score]
         }
         return render(request, 'animeList/homepage.html', context)
     else:
