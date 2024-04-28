@@ -24,7 +24,11 @@ SECRET_KEY = 'django-insecure-l5_s@^ewah04b_^ur!5u(9_01l$*3v71o8ucf=4al^g-jw-3$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://personal-anime-list-03666f13882e.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'personalanimelist.pythonanywhere.com'
+]
 
 # Application definition
 

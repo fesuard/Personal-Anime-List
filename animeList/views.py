@@ -57,7 +57,7 @@ def home_view(request):
         for anime in animes_in_user_list:
             animes_in_user_list_id.append(anime['anime'])
         tag_list = Tag.objects.filter(id__in=animes_in_user_list_id)
-        print(tag_list)
+
 
         context = {
             'random_anime': random_anime,
