@@ -31,7 +31,7 @@
                       <div class="card-body" style="line-height: 1.5">
                         <h5 class="card-title">Soft stats</h5>
                         <p class="card-text">Total anime in list: {{ soft_stats.0 }}</p>
-                        <p class="card-text">Average score of all anime rated: {{ soft_stats.1 }}</p>
+                        <p class="card-text">Average score of all anime rated: {{ soft_stats.1|floatformat:"2" }}</p>
                       </div>
                     </div>
                 </div>
