@@ -25,16 +25,52 @@ def home_view(request):
     all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life'])
     obj_to_select = 4
     random_anime = random.sample(list(all_animes), obj_to_select)
-    all_grades = UserAnime.objects
-    # tags = Tag.objects.filter(anime__in=random_anime)
-    # anime_tags = []
-    # for anime in random_anime:
-    #     tags = Tag.objects.filter(anime__title=anime)
-    #     anime_tags.append({anime: tags})
-    context = {
-        'random_anime': random_anime,
-    }
-    return render(request, 'animeList/homepage.html', context)
+    fact_list = [
+        'Anime is a style of animation that originated in Japan and has become popular worldwide.',
+        'The word "anime" is derived from the English word "animation."',
+        'The first anime film ever made is "Momotaro, Sacred Sailors," released in 1945.',
+        'Astro Boy, created by Osamu Tezuka in 1963, is considered one of the first successful anime series.',
+        'Hayao Miyazaki is one of the most renowned anime directors, known for films like "Spirited Away" and "My Neighbor Totoro."',
+        '"Dragon Ball Z" is one of the most popular and influential anime series worldwide.',
+        '"Naruto" is another widely popular anime series, known for its compelling characters and epic battles.',
+        '"One Piece" holds the Guinness World Record for the most copies published for the same comic book series by a single author.',
+        '"Pokémon" is a globally recognized anime franchise, known for its video games, trading cards, and animated series.',
+        '"Attack on Titan" is a dark fantasy anime series that has gained widespread acclaim for its intense action and compelling story.',
+        'Studio Ghibli is a renowned Japanese animation studio responsible for many beloved anime films.',
+        '"Death Note" is a psychological thriller anime series about a high school student who gains the power to kill anyone by writing their name in a notebook.',
+        '"Fullmetal Alchemist" is a popular anime series known for its complex storyline and well-developed characters.',
+        '"Sailor Moon" is a classic magical girl anime series that has inspired generations of fans.',
+        '"Cowboy Bebop" is a critically acclaimed anime series that blends elements of science fiction, noir, and jazz music.',
+        '"Neon Genesis Evangelion" is a groundbreaking mecha anime series known for its psychological themes and complex narrative.'
+    ]
+    random_fact = random.choice(fact_list)
+    if request.user.is_authenticated:
+        user = request.user
+        number_rated_anime = UserAnime.objects.filter(user=user).count()
+        scores = UserAnime.objects.filter(user=user).values('score')
+        score_list = []
+        for score in scores:
+            score_list.append(score['score'])
+        avg_score = sum(score_list)/len(score_list)
+        animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
+        animes_in_user_list_id = []
+        for anime in animes_in_user_list:
+            animes_in_user_list_id.append(anime['anime'])
+        tag_list = Tag.objects.filter(id__in=animes_in_user_list_id)
+        print(tag_list)
+
+        context = {
+            'random_anime': random_anime,
+            'random_fact': random_fact,
+            'soft_stats': [number_rated_anime, avg_score]
+        }
+        return render(request, 'animeList/homepage.html', context)
+    else:
+        context = {
+            'random_anime': random_anime,
+            'random_fact': random_fact,
+        }
+        return render(request, 'animeList/homepage.html', context)
 
 
 class AnimeCreateView(CreateView):
@@ -145,6 +181,7 @@ class AnimeUserUpdateView(UpdateView):
         return kwargs
 
     def get_success_url(self):
+        messages.success(self.request, 'Anime updated successfully!')
         return self.request.META['HTTP_REFERER']
 
     def get_form(self, form_class=None):

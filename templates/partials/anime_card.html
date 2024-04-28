@@ -26,13 +26,14 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">{{ anime.status }}</li>
             <li class="list-group-item">{{ anime.year }} {{ anime.season }}</li>
-            {% for user_anime in anime.get_user_anime %}
-                {% if request.user == user_anime.user %}
-                    <li class="list-group-item">{{ user_anime.eps_seen }} / {{ anime.episodes }}</li>
-                    <li class="list-group-item">{{ user_anime.watch_status }}</li>
-                    <li class="list-group-item">{{ user_anime.score }}</li>
-                {% endif %}
-            {% endfor %}
+            <li class="list-group-item">{{ anime.average_rating }}</li>
+{#            {% for user_anime in anime.get_user_anime %}#}
+{#                {% if request.user == user_anime.user %}#}
+{#                    <li class="list-group-item">{{ user_anime.eps_seen }} / {{ anime.episodes }}</li>#}
+{#                    <li class="list-group-item">{{ user_anime.watch_status }}</li>#}
+{#                    <li class="list-group-item">{{ user_anime.score }}</li>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
         </ul>
         <div class="card-body">
             <a href="{% url 'details-anime' anime.id %}" class="card-link">Add anime</a>

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from userManagement.forms import UserForm
+from userManagement.forms import UserForm, UserUpdateForm
 from userManagement.models import CustomUser
 
 
@@ -25,3 +25,9 @@ class UserCreateView(CreateView):
         new_user.save()
         return redirect('login')
 
+
+class UserUpdateView(UpdateView):
+    template_name = 'userManagement/update_user.html'
+    model = CustomUser
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('home-page')

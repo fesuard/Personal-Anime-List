@@ -22,11 +22,11 @@
 {#                            {% endfor %}#}
 {#                            </ul>#}
 {#                        {% endif %}#}
-                        {% if request.GET.success %}
+                        {% for message in messages %}
                             <div class="alert alert-success" role="alert">
-                                Your update was successful!
+                                {{ message }}
                             </div>
-                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

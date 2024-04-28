@@ -1,6 +1,7 @@
 import django
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.forms import TextInput
 
 from userManagement.models import CustomUser
 
@@ -61,7 +62,14 @@ class UserForm(UserCreationForm):
         return email
 
 
-class UserUpdateForm(UserChangeForm):
+class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'nickname']
+
+        widgets = {
+            'first_name': TextInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control'}),
+            'nickname': TextInput(attrs={'class': 'form-control'}),
+
+        }

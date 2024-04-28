@@ -68,7 +68,7 @@
                                 <td>{{ user_anime.get_score_display }}</td>
                                 <td>{{ user_anime.anime.type }}</td>
                                 <td>{{ user_anime.eps_seen }} / {{ user_anime.anime.episodes }}</td>
-                                <td>{{ user_anime.watch_status }}</td>
+                                <td>{{ user_anime.get_watch_status_display }}</td>
                                 <td class="tags-cell">
                                     {% for tag in user_anime.anime.tags.all %}
                                         <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a>,</span>

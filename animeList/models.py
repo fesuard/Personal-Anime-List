@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Avg
+
 from userManagement.models import CustomUser
 
 
@@ -46,6 +48,12 @@ class Anime(models.Model):
 
     def get_user_anime(self):
         return UserAnime.objects.filter(anime=self)
+
+    def average_rating(self):
+        if UserAnime.objects.filter(anime=self).aggregate(Avg('score'))['score__avg']:
+            return f"Average user score: {UserAnime.objects.filter(anime=self).aggregate(Avg('score'))['score__avg']}"
+        else:
+            return 'Not rated yet'
 
 
 class UserAnime(models.Model):

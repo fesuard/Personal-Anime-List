@@ -14,6 +14,28 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="col-md-3 offset-3 gy-5">
+                <br><br><br><br><br>
+                <div class="row">
+                    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                      <div class="card-header">The More You Know</div>
+                      <div class="card-body" style="line-height: 1.5; height: 9lh">
+                        <h5 class="card-title">Anime facts</h5>
+                            <p class="card-text" style="vertical-align: center">{{ random_fact }}</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                      <div class="card-header">This account</div>
+                      <div class="card-body" style="line-height: 1.5">
+                        <h5 class="card-title">Soft stats</h5>
+                        <p class="card-text">Total anime in list: {{ soft_stats.0 }}</p>
+                        <p class="card-text">Average score of all anime rated: {{ soft_stats.1 }}</p>
+                      </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
