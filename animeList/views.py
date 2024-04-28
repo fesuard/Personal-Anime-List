@@ -137,14 +137,27 @@ class AnimeUserUpdateView(UpdateView):
     model = UserAnime
     template_name = 'animeList/user_anime_update_view.html'
     form_class = UserAnimeUpdateForm
-    success_url = reverse_lazy('anime-list')
+
+    # so that you can get self.request from form
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_success_url(self):
+        return self.request.META['HTTP_REFERER']
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
+        initial = super().get_initial()
         # : UserAnime s-a folosit ca sa specificam clasa, ca sa iti faca autofill (ex linia 149)
         user_anime: UserAnime = self.object
         form.fields['eps_seen'].widget.attrs.update(
             {'class': 'form-control', 'min': '0', 'max': f'{user_anime.anime.episodes}'})
+        form.fields['score'].widget.attrs.update(
+            {'class': 'form-control'})
+        form.fields['watch_status'].widget.attrs.update(
+            {'class': 'form-control'})
         return form
 
 
