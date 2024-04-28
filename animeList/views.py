@@ -51,13 +51,12 @@ def home_view(request):
         score_list = []
         for score in scores:
             score_list.append(score['score'])
-        avg_score = sum(score_list)/len(score_list)
+        avg_score = round(sum(score_list) / len(score_list), 2)
         animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
         animes_in_user_list_id = []
         for anime in animes_in_user_list:
             animes_in_user_list_id.append(anime['anime'])
         tag_list = Tag.objects.filter(id__in=animes_in_user_list_id)
-
 
         context = {
             'random_anime': random_anime,
