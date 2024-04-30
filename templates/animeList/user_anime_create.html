@@ -1,9 +1,68 @@
 {% extends 'base.html' %}
 {% block title %}Add a new anime{% endblock %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            {{ form }}
-            <button type="submit" class="btn btn-outline-success">Save</button>
-    </form>
+{#    <div class="container-fluid">#}
+{#        <div class="row">#}
+{#            <div class="col-md-4 offset-md-4 gy-5 col-12">#}
+{#                <div class="card col-12">#}
+{#                    <img src="{{ user_anime.picture }}" class="card-img-top" style="height: 360px; object-fit: fill"#}
+{#                         alt="anime pic">#}
+{#                    <div class="card-body">#}
+{#                        <h5 title="{{ anime.title }}"#}
+{#                            class="card-title custom_card_title">{{ anime.title }}</h5>#}
+{#                        {% for message in messages %}#}
+{#                            <div class="alert alert-success" role="alert">#}
+{#                                {{ message }}#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                        <p class="card-text"> Tags: </p>#}
+{#                        <ul class="tags-cell-detail-view">#}
+{#                            {% for tag in anime.tags.all %}#}
+{##}
+{#                                    <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a> </span>#}
+{##}
+{#                            {% endfor %}#}
+{#                        <br><br>#}
+{#                        <button class="show-all-btn btn btn-secondary">Show All Tags</button>#}
+{#                        <br>#}
+{#                        <button class="hide-btn btn btn-secondary" style="display: none;">Hide</button>#}
+{#                        </ul>#}
+{##}
+{#                        <p>#}
+{#                            {% if anime.tags.count > 4 %}#}
+{#                                {{ anime.tags.count|add:-4 }}#}
+{#                            {% else %}#}
+{#                                No#}
+{#                            {% endif %}#}
+{#                            tags remaining#}
+{#                        </p>#}
+{#                    </div>#}
+{#                    <ul class="list-group list-group-flush">#}
+{#                        <li class="list-group-item">{{ anime.status }} / {{ anime.episodes }} episodes</li>#}
+{#                        <li class="list-group-item">{{ anime.year }} {{ anime.season }}</li>#}
+{#                        <li class="list-group-item">{{ anime.average_rating }}</li>#}
+{#                    </ul>#}
+{#                    <div>#}
+{#                    <form method="post" enctype="multipart/form-data">#}
+{#                        {% csrf_token %}#}
+{#                            {{ form }}#}
+{#                        <button type="submit" class="btn btn-primary">Save</button>#}
+{#                    </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <br>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 gy-5 col-12">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+     </div>
 {% endblock %}

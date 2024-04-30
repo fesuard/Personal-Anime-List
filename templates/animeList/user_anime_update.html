@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Create a new student{% endblock %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            {{ form }}
-            <button type="submit" class="btn btn-outline-success">Save</button>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 offset-md-4 gy-5 col-12">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+     </div>
 {% endblock %}

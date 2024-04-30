@@ -73,9 +73,9 @@
                                     {% for tag in user_anime.anime.tags.all %}
                                         <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a>,</span>
                                     {% endfor %}
-                                    <button class="show-all-btn">Show All Tags</button>
+                                    <button class="show-all-btn btn btn-secondary">Show All Tags</button>
                                     <br>
-                                    <button class="hide-btn" style="display: none;">Hide</button>
+                                    <button class="hide-btn btn btn-secondary" style="display: none;">Hide</button>
                                     
                                 </td>
                                 <td> <a href="{% url 'anime-update-list' user_anime.id %}">Edit anime</a></td>
