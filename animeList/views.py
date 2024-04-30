@@ -53,23 +53,32 @@ def home_view(request):
         score_list = []
         for score in scores:
             score_list.append(score['score'])
-        avg_score = sum(score_list) / len(score_list)
-        animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
-        tags = []
-        tags_count = {}
-        for anime in animes_in_user_list:
-            anime_tags = Anime.objects.filter(id=anime['anime']).values_list('tags__name', flat=True)
-            tags.extend(anime_tags)
-        for tag in tags:
-            tags_count[tag] = tags_count.get(tag, 0) + 1
-        tags_count = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:5]
+        if UserAnime.objects.filter(user=user).exists():
+            avg_score = sum(score_list) / len(score_list)
+            animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
+            tags = []
+            tags_count = {}
+            for anime in animes_in_user_list:
+                anime_tags = Anime.objects.filter(id=anime['anime']).values_list('tags__name', flat=True)
+                tags.extend(anime_tags)
+            for tag in tags:
+                tags_count[tag] = tags_count.get(tag, 0) + 1
+            tags_count = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:5]
 
-        context = {
-            'random_anime': random_anime,
-            'random_fact': random_fact,
-            'soft_stats': [number_rated_anime, avg_score, tags_count]
-        }
-        return render(request, 'animeList/homepage.html', context)
+            context = {
+                'random_anime': random_anime,
+                'random_fact': random_fact,
+                'soft_stats': [number_rated_anime, avg_score, tags_count]
+            }
+            return render(request, 'animeList/homepage.html', context)
+        else:
+            no_message, no_stats = 'No anime added yet', 0
+            context = {
+                'random_anime': random_anime,
+                'random_fact': random_fact,
+                'no_soft_stats': [no_message, no_stats]
+            }
+            return render(request, 'animeList/homepage.html', context)
     else:
         context = {
             'random_anime': random_anime,
