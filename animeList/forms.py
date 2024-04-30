@@ -31,6 +31,18 @@ class UserAnimeForm(forms.ModelForm):
             'score': Select(attrs={'class': 'form-select'})
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        watch_status = cleaned_data.get('watch_status')
+        eps_seen = cleaned_data.get('eps_seen')
+        anime = cleaned_data.get('anime')
+        max_episodes = anime.episodes
+        if watch_status == 'completed' and int(eps_seen) < int(max_episodes):
+            raise ValidationError(f'Cannot be set as "completed" since you have seen {eps_seen}/{max_episodes} eps')
+        if int(eps_seen) > int(max_episodes):
+            raise ValidationError(f'Maximum number of episodes is: {max_episodes}')
+        return cleaned_data
+
 
 class UserAnimeUpdateForm(forms.ModelForm):
     # am specificat in init asta ca sa pot sa trimit self.request din form

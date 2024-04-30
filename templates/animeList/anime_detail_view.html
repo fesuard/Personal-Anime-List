@@ -10,6 +10,11 @@
                     <div class="card-body">
                         <h5 title="{{ anime.title }}"
                             class="card-title custom_card_title">{{ anime.title }}</h5>
+                        {% for message in messages %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         <p class="card-text"> Tags: </p>
                         <ul class="limited_list">
                             {% for tag in anime.tags.all %}

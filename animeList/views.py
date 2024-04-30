@@ -44,6 +44,8 @@ def home_view(request):
         '"Neon Genesis Evangelion" is a groundbreaking mecha anime series known for its psychological themes and complex narrative.'
     ]
     random_fact = random.choice(fact_list)
+    # The following block of code is for gettings some soft stats as in: the user's
+    # avg score, no of animes in list, favorite tags
     if request.user.is_authenticated:
         user = request.user
         number_rated_anime = UserAnime.objects.filter(user=user).count()
@@ -52,17 +54,20 @@ def home_view(request):
         for score in scores:
             score_list.append(score['score'])
         avg_score = sum(score_list) / len(score_list)
-        rounded_avg_score = round(avg_score, 2)
         animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
-        animes_in_user_list_id = []
+        tags = []
+        tags_count = {}
         for anime in animes_in_user_list:
-            animes_in_user_list_id.append(anime['anime'])
-        tag_list = Tag.objects.filter(id__in=animes_in_user_list_id)
+            anime_tags = Anime.objects.filter(id=anime['anime']).values_list('tags__name', flat=True)
+            tags.extend(anime_tags)
+        for tag in tags:
+            tags_count[tag] = tags_count.get(tag, 0) + 1
+        tags_count = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:5]
 
         context = {
             'random_anime': random_anime,
             'random_fact': random_fact,
-            'soft_stats': [number_rated_anime, rounded_avg_score]
+            'soft_stats': [number_rated_anime, avg_score, tags_count]
         }
         return render(request, 'animeList/homepage.html', context)
     else:
@@ -156,6 +161,7 @@ class UpdateUserAnimeView(UpdateView):
     # success_url = reverse_lazy('home-page')
 
     def get_success_url(self):
+        messages.success(self.request, 'Anime updated successfully!')
         return self.request.META['HTTP_REFERER']
 
 

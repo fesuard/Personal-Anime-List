@@ -3,7 +3,7 @@
         <img src="{{ anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"
              alt="anime pic">
         <div class="card-body">
-            {#                                   for the hidden title to display fully when you hover over it#}
+            {#for the hidden title to display fully when you hover over it#}
             <h5 title="{{ anime.title }}"
                 class="card-title custom_card_title">{{ anime.title }}</h5>
             <p class="card-text"> Tags: </p>
@@ -24,7 +24,7 @@
             </p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{ anime.status }}</li>
+            <li class="list-group-item">{{ anime.status }} / {{ anime.episodes }} episodes</li>
             <li class="list-group-item">{{ anime.year }} {{ anime.season }}</li>
             <li class="list-group-item">{{ anime.average_rating }}</li>
 {#            {% for user_anime in anime.get_user_anime %}#}
