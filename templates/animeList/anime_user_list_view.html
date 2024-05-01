@@ -9,42 +9,6 @@
                 <h3 style="text-align: center">{{ user.first_name }}'s List</h3>
                 <br><br>
                 <div class="row">
-{#                        <div class="col-md-6 col-12">#}
-{#                            <div class="card col-12">#}
-{#                                <img src="{{ anime.anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"#}
-{#                                     alt="anime pic">#}
-{#                                <div class="card-body">#}
-{#                                    <h5 title="{{ anime.anime.title }}"#}
-{#                                        class="card-title custom_card_title">{{ anime.anime.title }}</h5>#}
-{#                                    <p class="card-text"> Tags: </p>#}
-{#                                    <ul class="limited_list">#}
-{#                                        {% for tag in anime.anime.tags.all %}#}
-{#                                            {% if forloop.counter0 < 4 %}#}
-{#                                                <li>{{ tag }}</li>#}
-{#                                            {% endif %}#}
-{#                                        {% endfor %}#}
-{#                                    </ul>#}
-{#                                    <p>#}
-{#                                        {% if anime.tags.count > 4 %}#}
-{#                                            {{ anime.tags.count|add:-4 }}#}
-{#                                        {% else %}#}
-{#                                            No#}
-{#                                        {% endif %}#}
-{#                                        tags remaining#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                                <ul class="list-group list-group-flush">#}
-{#                                    <li class="list-group-item">{{ anime.anime.status }}</li>#}
-{#                                    <li class="list-group-item">{{ anime.anime.year }} {{ anime.anime.season }}</li>#}
-{#                                    <li class="list-group-item">Your score: {{ anime.get_score_display }}</li>#}
-{#                                </ul>#}
-{#                                <div class="card-body">#}
-{#                                    <a href="{% url 'details-anime' anime.anime_id %}" class="card-link">Change anime</a>#}
-{#                                    <a href="#" class="card-link">Another link</a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <br>#}
-{#                        </div>#}
                     <table class="table">
                         <thead>
                         <tr>
@@ -63,7 +27,7 @@
                         {% for user_anime in user_anime_list %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
-                                <td><img src="{{ user_anime.anime.thumbnail }}" alt="anime pic" width=57></td>
+                                <td><img src="{{ user_anime.anime.thumbnail }}" alt="anime pic" style="height: 70px; width: 60px"></td>
                                 <td class="anime_list_row" title="{{ user_anime.anime.title }}">{{ user_anime.anime.title }}</td>
                                 <td>{{ user_anime.get_score_display }}</td>
                                 <td>{{ user_anime.anime.type }}</td>
@@ -85,12 +49,26 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-                        <tfoot>
-{#                            <tr>#}
-{#                                <td><a href="{% url 'anime-update-list' anime.id %}" class="btn btn-primary">Update</a></td>#}
-{#                            </tr>#}
-                        </tfoot>
                     </table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <br><br>
+                <h3 style="text-align: center"> My List Filters </h3>
+                <br><br><br><br>
+                <div class="card" style="width: 18rem;">
+                  <div class="card-header">
+                    Filters
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form method="get" class="col-12">
+                            {{ filters }}
+                            <br>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </li>
+                  </ul>
                 </div>
             </div>
         </div>

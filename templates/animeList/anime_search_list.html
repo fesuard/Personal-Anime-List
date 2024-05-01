@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 offset-1 col-12">
                 <br><br>
                 <h3 style="text-align: center">Search result</h3>
                 <br><br>
@@ -14,15 +14,24 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3 offset-1">
                 <br><br>
                 <h3 style="text-align: center"> Advanced Filters </h3>
                 <br><br>
-                <form method="get" class="col-12">
-                    {{ filters }}
-                    <button type="submit">Search</button>
-                </form>
-                <br><br>
+                <div class="card" style="width: 18rem;">
+                  <div class="card-header">
+                    Featured
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <form method="get" class="col-12">
+                            {{ filters }}
+                            <br>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </li>
+                  </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -1,13 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
 from animeList.models import Anime, Tag, UserAnime
 from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm, UserAnimeUpdateForm
-from django.db import connection
 from django.shortcuts import render
 import random
-from animeList.filters import AnimeFilter
+from animeList.filters import AnimeFilter, AnimeListFilter
 
 
 def home_view(request):
@@ -22,7 +20,8 @@ def home_view(request):
     #     print(f'Deleting {a.id}')
     #     a.delete()
 
-    all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life'])
+    all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life']).exclude(picture='').exclude(
+            picture='https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png')
     obj_to_select = 4
     random_anime = random.sample(list(all_animes), obj_to_select)
     fact_list = [
@@ -80,9 +79,11 @@ def home_view(request):
             }
             return render(request, 'animeList/homepage.html', context)
     else:
+        no_message, no_stats = 'Log in to create you list', 0
         context = {
             'random_anime': random_anime,
             'random_fact': random_fact,
+            'no_soft_stats': [no_message, no_stats]
         }
         return render(request, 'animeList/homepage.html', context)
 
@@ -105,7 +106,8 @@ class AnimeSearchView(ListView):
     context_object_name = 'all_anime'
 
     def get_queryset(self):
-        return Anime.objects.exclude(picture__isnull=True).exclude(picture='')
+        return Anime.objects.exclude(picture__isnull=True).exclude(picture='').exclude(
+            picture='https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -182,6 +184,15 @@ class AnimeUserListView(ListView):
     def get_queryset(self):
         user = self.request.user
         return UserAnime.objects.filter(user=user.id)
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        anime_in_list = UserAnime.objects.filter(user=self.request.user.id)
+        myFilter = AnimeListFilter(self.request.GET, queryset=anime_in_list)
+        anime_in_list = myFilter.qs
+        data['user_anime_list'] = anime_in_list
+        data['filters'] = myFilter.form
+        return data
 
 
 class AnimeUserUpdateView(UpdateView):

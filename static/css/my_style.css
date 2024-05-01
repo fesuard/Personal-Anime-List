@@ -51,3 +51,14 @@ legend {
     white-space: normal;
     text-overflow: initial;
 }
+
+/*table {*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*}*/
+td, th {
+    /*padding: 10px; !* Adjust padding as needed *!*/
+    text-align: left;
+    /*vertical-align: top; !* Align content at the top of each cell *!*/
+    height: 1px; /* Fixed height for each row */
+}

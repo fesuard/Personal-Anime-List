@@ -1,7 +1,9 @@
 <div class="col-md-6 col-12">
     <div class="card col-12">
+        {% if anime.picture.alt != "no-image" %}
         <img src="{{ anime.picture }}" class="card-img-top" style="height: 360px; object-fit: cover"
-             alt="anime pic">
+             alt="no-image">
+        {% endif %}
         <div class="card-body">
             {#for the hidden title to display fully when you hover over it#}
             <h5 title="{{ anime.title }}"
@@ -29,7 +31,7 @@
             <li class="list-group-item">{{ anime.average_rating }}</li>
         </ul>
         <div class="card-body">
-            <a href="{% url 'details-anime' anime.id %}" class="card-link">Add anime</a>
+            <a href="{% url 'details-anime' anime.id %}" class="card-link btn btn-primary">Add anime</a>
         </div>
     </div>
     <br>
