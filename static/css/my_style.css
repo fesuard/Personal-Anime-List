@@ -36,8 +36,9 @@ legend {
 }
 
 .navbar .nav-item .dropdown-item:hover {
-    background-color: #6f2cf5;
+    background-color: blue;
 }
+
 
 .anime_list_row {
     max-width: 150px; /* Adjust the maximum width as needed */
@@ -56,9 +57,123 @@ legend {
 /*    border-collapse: collapse;*/
 /*    width: 100%;*/
 /*}*/
-td, th {
-    /*padding: 10px; !* Adjust padding as needed *!*/
-    text-align: left;
-    /*vertical-align: top; !* Align content at the top of each cell *!*/
-    height: 1px; /* Fixed height for each row */
+
+
+/*.col-md-2 {*/
+/*    position: relative;*/
+/*}*/
+
+.vertical-image-container-left {
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    right: 70px;
+    position: fixed;
+    background-position: left;
+    /*background-attachment: fixed;*/
+    background-image: url("../images/vertical_image4.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+    z-index: -1;
+
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*!*padding-left: 0;*!*/
+    /*margin-left: -13px;*/
+    /*margin-right: -25px;*/
+
 }
+
+.vertical-image-container-right {
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 70px;
+    position: fixed;
+    background-position: right;
+    /*background-attachment: fixed;*/
+    background-image: url("../images/vertical_image4.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+    z-index: -1;
+}
+
+
+
+
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*!*padding-left: 0;*!*/
+    /*margin-left: 65px;*/
+    /*margin-right: 65px;*/
+
+
+
+
+
+
+
+
+
+/*.custom-td {*/
+/*    background-color: #2b3034;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.table thead {*/
+/*    background-color: #2b3034;*/
+/*    color: white;*/
+/*}*/
+
+/*.table thead tr th {*/
+/*    color: white;*/
+/*    background-color: #2b3034;*/
+/*}*/
+
+/*.table tbody tr td {*/
+/*    background-color: #2b3034;*/
+/*    color: #e2e5ea;*/
+/*}*/
+
+/*!* Set background color for table rows *!*/
+/*.table tbody tr {*/
+/*    background-color: #2b3034;*/
+/*    color: white;*/
+/*}*/
+
+/*!* Set background color for table cells *!*/
+/*.table td, .table th {*/
+/*    background-color: #2b3034;*/
+/*    color: white;*/
+/*    padding: 8px; !* Adjust padding as needed *!*/
+/*}*/
+
+/*!* Set background color for table cells in the first column *!*/
+/*.table td:first-child, .table th:first-child {*/
+/*    background-color: #2b3034;*/
+/*    color: white;*/
+/*}*/
+
+/*!* Set background color for table cells in the last column *!*/
+/*.table td:last-child, .table th:last-child {*/
+/*    background-color: #2b3034;*/
+/*    color: white;*/
+/*}*/
+

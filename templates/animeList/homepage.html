@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6 offset-1 col-12">
                 <br><br>
-                <h3 style="text-align: center">Something you might like</h3>
+                <h3 style="text-align: center; color: #ffffff">Something you might like</h3>
                 <br><br>
                 <div class="row">
                     {% for anime in random_anime %}
@@ -17,11 +17,11 @@
             <div class="col-md-3 offset-1 gy-5">
                 <br><br><br><br><br>
                 <div class="row">
-                    <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card text-bg-primary mb-3" style="max-width: 18rem">
                       <div class="card-header">The More You Know</div>
                       <div class="card-body" style="line-height: 1.5; height: 9lh">
                         <h5 class="card-title">Anime facts</h5>
-                            <p class="card-text" style="vertical-align: center">{{ random_fact }}</p>
+                            <p class="card-text" style="vertical-align: center; color: #e2e5ea">{{ random_fact }}</p>
                       </div>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                       <div class="card-header">This account</div>
                       <div class="card-body" style="line-height: 1.5">
                         <h5 class="card-title">Soft stats</h5>
-                        <p class="card-text">Total anime in list: {{ soft_stats.0 }}{{ no_soft_stats.0 }}</p>
-                        <p class="card-text">Average score of all anime rated: {{ soft_stats.1|floatformat:"2" }}{{ no_soft_stats.1 }}</p>
-                        <p class="card-text">Top 5 tags: {{ no_soft_stats.1 }}</p>
+                        <p class="card-text" style="color: #e2e5ea">Total anime in list: {{ soft_stats.0 }}{{ no_soft_stats.0 }}</p>
+                        <p class="card-text" style="color: #e2e5ea">Average score of all anime rated: {{ soft_stats.1|floatformat:"2" }}{{ no_soft_stats.1 }}</p>
+                        <p class="card-text" style="color: #e2e5ea">Top 5 tags: {{ no_soft_stats.1 }}</p>
                         {% for item in soft_stats.2 %}
-                            <p class="card-text">{{ item.0|title }}: {{ item.1 }} </p>
+                            <p class="card-text" style="color: #e2e5ea">{{ item.0|title }}: {{ item.1 }} </p>
                         {% endfor %}
                       </div>
                     </div>
