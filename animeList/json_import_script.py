@@ -7,10 +7,10 @@ import django
 # sa importam modelul
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pal.settings")
 django.setup()
-from animeList.models import Anime, Tag
 
 
 def import_json(path):
+    from animeList.models import Anime, Tag
     with open(path, encoding="utf8") as jfile:
         data = json.load(jfile)
 

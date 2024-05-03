@@ -1,7 +1,6 @@
 from django import forms
-from django.contrib import messages
 from django.core.exceptions import ValidationError
-from django.forms import NumberInput, Select, TextInput
+from django.forms import NumberInput, Select
 
 from animeList.models import Anime, UserAnime
 

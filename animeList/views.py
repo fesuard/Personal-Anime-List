@@ -6,7 +6,6 @@ from django.views.generic import (
     CreateView,
     DetailView,
     ListView,
-    TemplateView,
     UpdateView,
 )
 
@@ -17,7 +16,7 @@ from animeList.forms import (
     UserAnimeForm,
     UserAnimeUpdateForm,
 )
-from animeList.models import Anime, Tag, UserAnime
+from animeList.models import Anime, UserAnime
 
 
 def home_view(request):
@@ -259,7 +258,7 @@ class AnimeUserUpdateView(UpdateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        initial = super().get_initial()
+        super().get_initial()
         # : UserAnime s-a folosit ca sa specificam clasa, ca sa iti faca autofill (ex linia 149)
         user_anime: UserAnime = self.object
         form.fields["eps_seen"].widget.attrs.update(
