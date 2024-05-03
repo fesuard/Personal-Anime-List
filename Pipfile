@@ -19,6 +19,7 @@ isort = "*"
 ruff = "*"
 mypy = "*"
 django-stubs = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.10"

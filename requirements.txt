@@ -1,9 +1,0 @@
-pipenv install asgiref==3.8.1
-pipenv install Django==5.0.4
-pipenv install django-filter==24.2
-pipenv install gunicorn==22.0.0
-pipenv install packaging==24.0
-pipenv install pillow==10.3.0
-pipenv install sqlparse==0.5.0
-pipenv install tzdata==2024.1
-
