@@ -6,23 +6,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('animeList', '0001_initial'),
+        ("animeList", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='anime',
-            name='season',
-            field=models.CharField(choices=[('SPRING', 'spring'), ('SUMMER', 'summer'), ('WINTER', 'winter'), ('FALL', 'fall')], max_length=80),
+            model_name="anime",
+            name="season",
+            field=models.CharField(
+                choices=[("SPRING", "spring"), ("SUMMER", "summer"), ("WINTER", "winter"), ("FALL", "fall")],
+                max_length=80,
+            ),
         ),
         migrations.AlterField(
-            model_name='anime',
-            name='status',
-            field=models.CharField(choices=[('ONGOING', 'ongoing'), ('FINISHED', 'finished'), ('UPCOMING', 'upcoming'), ('UNKNOWN', 'unknown')], max_length=80),
+            model_name="anime",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("ONGOING", "ongoing"),
+                    ("FINISHED", "finished"),
+                    ("UPCOMING", "upcoming"),
+                    ("UNKNOWN", "unknown"),
+                ],
+                max_length=80,
+            ),
         ),
         migrations.AlterField(
-            model_name='anime',
-            name='type',
-            field=models.CharField(choices=[('SPECIAL', 'special'), ('TV', 'tv'), ('MOVIE', 'movie'), ('OVA', 'ova'), ('ONA', 'ona'), ('UNKNOWN', 'unknown')], max_length=100),
+            model_name="anime",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ("SPECIAL", "special"),
+                    ("TV", "tv"),
+                    ("MOVIE", "movie"),
+                    ("OVA", "ova"),
+                    ("ONA", "ona"),
+                    ("UNKNOWN", "unknown"),
+                ],
+                max_length=100,
+            ),
         ),
     ]

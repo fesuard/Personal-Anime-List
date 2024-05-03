@@ -13,24 +13,24 @@ class Tag(models.Model):
 
 class Anime(models.Model):
     STATUS = [
-        ('ONGOING', 'ongoing'),
-        ('FINISHED', 'finished'),
-        ('UPCOMING', 'upcoming'),
-        ('UNKNOWN', 'unknown'),
+        ("ONGOING", "ongoing"),
+        ("FINISHED", "finished"),
+        ("UPCOMING", "upcoming"),
+        ("UNKNOWN", "unknown"),
     ]
     TYPE = [
-        ('SPECIAL', 'special'),
-        ('TV', 'tv'),
-        ('MOVIE', 'movie'),
-        ('OVA', 'ova'),
-        ('ONA', 'ona'),
-        ('UNKNOWN', 'unknown'),
+        ("SPECIAL", "special"),
+        ("TV", "tv"),
+        ("MOVIE", "movie"),
+        ("OVA", "ova"),
+        ("ONA", "ona"),
+        ("UNKNOWN", "unknown"),
     ]
     SEASON = [
-        ('SPRING', 'spring'),
-        ('SUMMER', 'summer'),
-        ('WINTER', 'winter'),
-        ('FALL', 'fall'),
+        ("SPRING", "spring"),
+        ("SUMMER", "summer"),
+        ("WINTER", "winter"),
+        ("FALL", "fall"),
     ]
     title = models.CharField(max_length=300)
     type = models.CharField(max_length=100, choices=TYPE)
@@ -50,31 +50,31 @@ class Anime(models.Model):
         return UserAnime.objects.filter(anime=self)
 
     def average_rating(self):
-        if UserAnime.objects.filter(anime=self).aggregate(Avg('score'))['score__avg']:
+        if UserAnime.objects.filter(anime=self).aggregate(Avg("score"))["score__avg"]:
             return f"Average user score: {UserAnime.objects.filter(anime=self).aggregate(Avg('score'))['score__avg']}"
         else:
-            return 'Not rated yet'
+            return "Not rated yet"
 
 
 class UserAnime(models.Model):
     SCORE = [
-        (1, '(1) Appalling'),
-        (2, '(2) Horrible'),
-        (3, '(3) Very Bad'),
-        (4, '(4) Bad'),
-        (5, '(5) Average'),
-        (6, '(6) Fine'),
-        (7, '(7) Good'),
-        (8, '(8) Very Good'),
-        (9, '(9) Great'),
-        (10, '(10) Masterpiece')
+        (1, "(1) Appalling"),
+        (2, "(2) Horrible"),
+        (3, "(3) Very Bad"),
+        (4, "(4) Bad"),
+        (5, "(5) Average"),
+        (6, "(6) Fine"),
+        (7, "(7) Good"),
+        (8, "(8) Very Good"),
+        (9, "(9) Great"),
+        (10, "(10) Masterpiece"),
     ]
     WATCH_STATUS = [
-        ('watching', 'Watching'),
-        ('completed', 'Completed'),
-        ('on-hold', 'On-hold'),
-        ('dropped', 'Dropped'),
-        ('plan_to_watch', 'Plan to Watch'),
+        ("watching", "Watching"),
+        ("completed", "Completed"),
+        ("on-hold", "On-hold"),
+        ("dropped", "Dropped"),
+        ("plan_to_watch", "Plan to Watch"),
     ]
     watch_status = models.CharField(max_length=50, choices=WATCH_STATUS)
     eps_seen = models.IntegerField(default=0)

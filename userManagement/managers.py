@@ -25,4 +25,3 @@ from django.contrib.auth.base_user import BaseUserManager
 #         if extra_fields.get("is_superuser") is not True:
 #             raise ValueError("Not superuser, is_superuser = False")
 #         return self.create_user(email, password, **extra_fields)
-

@@ -6,13 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('animeList', '0003_useranime'),
+        ("animeList", "0003_useranime"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='useranime',
-            name='score',
-            field=models.IntegerField(choices=[(1, '(1) Appalling'), (2, '(2) Horrible'), (3, '(3) Very Bad'), (4, '(4) Bad'), (5, '(5) Average'), (6, '(6) Fine'), (7, '(7) Good'), (8, '(8) Very Good'), (9, '(9) Great'), (10, '(10) Masterpiece')]),
+            model_name="useranime",
+            name="score",
+            field=models.IntegerField(
+                choices=[
+                    (1, "(1) Appalling"),
+                    (2, "(2) Horrible"),
+                    (3, "(3) Very Bad"),
+                    (4, "(4) Bad"),
+                    (5, "(5) Average"),
+                    (6, "(6) Fine"),
+                    (7, "(7) Good"),
+                    (8, "(8) Very Good"),
+                    (9, "(9) Great"),
+                    (10, "(10) Masterpiece"),
+                ]
+            ),
         ),
     ]

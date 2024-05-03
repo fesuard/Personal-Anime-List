@@ -7,10 +7,10 @@ from userManagement.models import CustomUser
 
 
 class UserCreateView(CreateView):
-    template_name = 'userManagement/create_user.html'
+    template_name = "userManagement/create_user.html"
     model = CustomUser
     form_class = UserForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy("login")
 
     def form_valid(self, form):
         new_user = form.save(commit=False)
@@ -23,11 +23,11 @@ class UserCreateView(CreateView):
         new_user.username = new_user.email
 
         new_user.save()
-        return redirect('login')
+        return redirect("login")
 
 
 class UserUpdateView(UpdateView):
-    template_name = 'userManagement/update_user.html'
+    template_name = "userManagement/update_user.html"
     model = CustomUser
     form_class = UserUpdateForm
-    success_url = reverse_lazy('home-page')
+    success_url = reverse_lazy("home-page")

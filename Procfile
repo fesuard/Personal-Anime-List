@@ -1,1 +1,0 @@
-web: gunicorn pal.wsgi --log-file -
