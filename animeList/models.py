@@ -32,16 +32,16 @@ class Anime(models.Model):
         ("WINTER", "winter"),
         ("FALL", "fall"),
     ]
-    title = models.CharField(max_length=300)
-    type = models.CharField(max_length=100, choices=TYPE)
-    episodes = models.CharField(max_length=10)
-    status = models.CharField(max_length=80, choices=STATUS)
-    year = models.IntegerField(null=True, blank=True)
-    season = models.CharField(max_length=80, choices=SEASON)
-    picture = models.CharField(max_length=100)
-    thumbnail = models.CharField(max_length=100)
-    relatedAnime = models.CharField(max_length=8000)
-    tags = models.ManyToManyField(Tag, blank=True)
+    title: str = models.CharField(max_length=300)
+    type: str = models.CharField(max_length=100, choices=TYPE)
+    episodes: str = models.CharField(max_length=10)
+    status: str = models.CharField(max_length=80, choices=STATUS)
+    year: int = models.IntegerField(null=True, blank=True)
+    season: str = models.CharField(max_length=80, choices=SEASON)
+    picture: str = models.CharField(max_length=100)
+    thumbnail: str = models.CharField(max_length=100)
+    relatedAnime: str = models.CharField(max_length=8000)
+    tags: list[Tag] = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.title

@@ -1,6 +1,9 @@
 import random
+from typing import cast
 
 from django.contrib import messages
+from django.forms import Form
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import (
     CreateView,
@@ -33,8 +36,8 @@ def home_view(request):
 
     all_animes = (
         Anime.objects.filter(tags__name__in=["family friendly", "family life"])
-        .exclude(picture="")
-        .exclude(
+            .exclude(picture="")
+            .exclude(
             picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
         )
     )
@@ -144,8 +147,8 @@ class AnimeSearchView(ListView):
     def get_queryset(self):
         return (
             Anime.objects.exclude(picture__isnull=True)
-            .exclude(picture="")
-            .exclude(
+                .exclude(picture="")
+                .exclude(
                 picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
             )
         )
@@ -156,8 +159,8 @@ class AnimeSearchView(ListView):
         q = self.request.GET.get("anime_title", "")
         adv_search_anime = (
             Anime.objects.exclude(picture__isnull=True)
-            .exclude(picture="")
-            .exclude(
+                .exclude(picture="")
+                .exclude(
                 picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
             )
         )
@@ -247,16 +250,16 @@ class AnimeUserUpdateView(UpdateView):
     form_class = UserAnimeUpdateForm
 
     # so that you can get self.request from form
-    def get_form_kwargs(self):
+    def get_form_kwargs(self) -> dict:
         kwargs = super().get_form_kwargs()
         kwargs["request"] = self.request
         return kwargs
 
-    def get_success_url(self):
+    def get_success_url(self) -> str:
         messages.success(self.request, "Anime updated successfully!")
-        return self.request.META["HTTP_REFERER"]
+        return cast(str, self.request.META["HTTP_REFERER"])
 
-    def get_form(self, form_class=None):
+    def get_form(self, form_class: None | type = None) -> Form:
         form = super().get_form(form_class)
         super().get_initial()
         # : UserAnime s-a folosit ca sa specificam clasa, ca sa iti faca autofill (ex linia 149)
@@ -266,10 +269,10 @@ class AnimeUserUpdateView(UpdateView):
         )
         form.fields["score"].widget.attrs.update({"class": "form-control"})
         form.fields["watch_status"].widget.attrs.update({"class": "form-control"})
-        return form
+        return cast(Form, form)
 
 
-def stats_view(request):
+def stats_view(request: HttpRequest) -> HttpResponse:
     user = request.user
     scores = {}
     for i in range(1, 11):
