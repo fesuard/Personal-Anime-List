@@ -1,6 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager
 
-
 # class CustomUserManager(BaseUserManager):
 #     # facem asta pentru a lasa doar email in loc de username
 #

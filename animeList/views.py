@@ -1,11 +1,23 @@
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
-from animeList.models import Anime, Tag, UserAnime
-from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm, UserAnimeUpdateForm
-from django.shortcuts import render
 import random
+
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
+
 from animeList.filters import AnimeFilter, AnimeListFilter
+from animeList.forms import (
+    AddAnimeForm,
+    UpdateAnimeForm,
+    UserAnimeForm,
+    UserAnimeUpdateForm,
+)
+from animeList.models import Anime, Tag, UserAnime
 
 
 def home_view(request):

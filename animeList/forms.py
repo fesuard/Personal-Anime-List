@@ -1,10 +1,9 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.forms import TextInput, Select, NumberInput
-
-from animeList.models import Anime
-from animeList.models import UserAnime
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.forms import NumberInput, Select, TextInput
+
+from animeList.models import Anime, UserAnime
 
 
 class AddAnimeForm(forms.ModelForm):
