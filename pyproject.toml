@@ -29,10 +29,8 @@ unstable = true
 [tool.isort]
 atomic = true
 profile = "black"
-line_length = 88
+line_length = 120
 skip_gitignore = true
-skip_glob = ["tests/data", "profiling"]
-known_first_party = ["black", "blib2to3", "blackd", "_black_version"]
 
 [tool.mypy]
 # Specify the target platform details in config, so your developers are
