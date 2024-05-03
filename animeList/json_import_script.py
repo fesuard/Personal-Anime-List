@@ -11,6 +11,7 @@ django.setup()
 
 def import_json(path):
     from animeList.models import Anime, Tag
+
     with open(path, encoding="utf8") as jfile:
         data = json.load(jfile)
 

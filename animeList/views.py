@@ -5,20 +5,10 @@ from django.contrib import messages
 from django.forms import Form
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from animeList.filters import AnimeFilter, AnimeListFilter
-from animeList.forms import (
-    AddAnimeForm,
-    UpdateAnimeForm,
-    UserAnimeForm,
-    UserAnimeUpdateForm,
-)
+from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm, UserAnimeUpdateForm
 from animeList.models import Anime, UserAnime
 
 
@@ -36,8 +26,8 @@ def home_view(request):
 
     all_animes = (
         Anime.objects.filter(tags__name__in=["family friendly", "family life"])
-            .exclude(picture="")
-            .exclude(
+        .exclude(picture="")
+        .exclude(
             picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
         )
     )
@@ -147,8 +137,8 @@ class AnimeSearchView(ListView):
     def get_queryset(self):
         return (
             Anime.objects.exclude(picture__isnull=True)
-                .exclude(picture="")
-                .exclude(
+            .exclude(picture="")
+            .exclude(
                 picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
             )
         )
@@ -159,8 +149,8 @@ class AnimeSearchView(ListView):
         q = self.request.GET.get("anime_title", "")
         adv_search_anime = (
             Anime.objects.exclude(picture__isnull=True)
-                .exclude(picture="")
-                .exclude(
+            .exclude(picture="")
+            .exclude(
                 picture="https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png"
             )
         )
