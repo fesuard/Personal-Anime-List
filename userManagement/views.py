@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
@@ -26,7 +27,7 @@ class UserCreateView(CreateView):
         return redirect('login')
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'userManagement/update_user.html'
     model = CustomUser
     form_class = UserUpdateForm

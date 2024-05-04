@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
 from animeList.models import Anime, Tag, UserAnime
@@ -89,7 +91,7 @@ def home_view(request):
         return render(request, 'animeList/homepage.html', context)
 
 
-class AnimeSearchView(ListView):
+class AnimeSearchView(LoginRequiredMixin, ListView):
     template_name = 'animeList/anime_search_list.html'
     model = Anime
     context_object_name = 'all_anime'
@@ -130,7 +132,7 @@ class AnimeDetailView(DetailView):
         return data
 
 
-class CreateUserAnimeView(CreateView):
+class CreateUserAnimeView(LoginRequiredMixin, CreateView):
     model = UserAnime
     form_class = UserAnimeForm
     template_name = 'animeList/user_anime_create.html'
@@ -153,7 +155,7 @@ class CreateUserAnimeView(CreateView):
         return super().form_valid(form)
 
 
-class UpdateUserAnimeView(UpdateView):
+class UpdateUserAnimeView(LoginRequiredMixin, UpdateView):
     model = UserAnime
     form_class = UserAnimeForm
     template_name = 'animeList/user_anime_update.html'
@@ -165,7 +167,7 @@ class UpdateUserAnimeView(UpdateView):
         return self.request.META['HTTP_REFERER']
 
 
-class AnimeUserListView(ListView):
+class AnimeUserListView(LoginRequiredMixin, ListView):
     model = UserAnime
     template_name = 'animeList/anime_user_list_view.html'
     context_object_name = 'user_anime_list'
@@ -184,7 +186,7 @@ class AnimeUserListView(ListView):
         return data
 
 
-class AnimeUserUpdateView(UpdateView):
+class AnimeUserUpdateView(LoginRequiredMixin, UpdateView):
     model = UserAnime
     template_name = 'animeList/user_anime_update_view.html'
     form_class = UserAnimeUpdateForm
@@ -213,6 +215,7 @@ class AnimeUserUpdateView(UpdateView):
         return form
 
 
+@login_required()
 def stats_view(request):
     user = request.user
     scores = []
