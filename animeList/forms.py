@@ -7,18 +7,6 @@ from animeList.models import UserAnime
 from django.contrib import messages
 
 
-class AddAnimeForm(forms.ModelForm):
-    class Meta:
-        model = Anime
-        fields = '__all__'
-
-
-class UpdateAnimeForm(forms.ModelForm):
-    class Meta:
-        model = Anime
-        fields = '__all__'
-
-
 class UserAnimeForm(forms.ModelForm):
     class Meta:
         model = UserAnime

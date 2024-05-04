@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
 from animeList.models import Anime, Tag, UserAnime
-from animeList.forms import AddAnimeForm, UpdateAnimeForm, UserAnimeForm, UserAnimeUpdateForm
+from animeList.forms import UserAnimeForm, UserAnimeUpdateForm
 from django.shortcuts import render
 import random
 from animeList.filters import AnimeFilter, AnimeListFilter
@@ -21,7 +21,7 @@ def home_view(request):
     #     a.delete()
 
     all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life']).exclude(picture='').exclude(
-            picture='https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png')
+        picture='https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png')
     obj_to_select = 4
     random_anime = random.sample(list(all_animes), obj_to_select)
     fact_list = [
@@ -87,18 +87,6 @@ def home_view(request):
             'no_soft_stats': [no_message, no_stats]
         }
         return render(request, 'animeList/homepage.html', context)
-
-
-class AnimeCreateView(CreateView):
-    template_name = 'animeList/create_anime.html'
-    model = Anime
-    form_class = AddAnimeForm
-
-
-class AnimeUpdateView(UpdateView):
-    template_name = 'animeList/update_anime.html'
-    model = Anime
-    form_class = UpdateAnimeForm
 
 
 class AnimeSearchView(ListView):
@@ -237,11 +225,17 @@ def stats_view(request):
     for tag in tags:
         tags_count[tag] = tags_count.get(tag, 0) + 1
     tags_sorted = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:min(len(tags_count), 15)]
-    statuses = UserAnime.objects.filter(user=user).values('watch_status')
+    statuses = UserAnime.objects.filter(user=user).values_list('watch_status', flat=True)
+    statuses_count = {}
+    statuses_context = []
+    for status in statuses:
+        statuses_count[status] = statuses_count.get(status, 0) + 1
+    for key, value in statuses_count.items():
+        statuses_context.append((key, value))
     context = {
         'scores': scores,
         'tags': tags_sorted,
-        'statuses': statuses,
+        'statuses': statuses_context,
     }
 
     return render(request, 'animeList/stats.html', context)

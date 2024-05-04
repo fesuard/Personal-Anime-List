@@ -27,12 +27,10 @@
                         <ul class="dropdown-menu" style="background-color: #6f2cf5">
                             <li><a class="dropdown-item" style="color: white" href="{% url 'anime-list' %}">View
                                 List</a></li>
-                            <li><a class="dropdown-item" style="color: white" href="{% url 'stats' %}">View Stats</a>
-                            </li>
                             <li>
                                 <hr class="dropdown-divider" style="background-color: white">
                             </li>
-                            <li><a class="dropdown-item" style="color: white" href="#">Weeb level</a></li>
+                            <li><a class="dropdown-item" style="color: white" href="{% url 'stats' %}">View Stats</a>
                         </ul>
                     </li>
                 {% else %}
@@ -41,33 +39,17 @@
                            data-bs-toggle="dropdown" aria-expanded="false">
                             My List
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="background-color: #6f2cf5">
                             <li><a class="dropdown-item" style="color: white" href="{% url "login" %}">View List</a>
-                            </li>
-                            <li><a class="dropdown-item" style="color: white" href="{% url "login" %}">View Stats</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider" style="background-color: white">
                             </li>
-                            <li><a class="dropdown-item" style="color: white" href="{% url "login" %}">Weeb level</a>
+                            <li><a class="dropdown-item" style="color: white" href="{% url "login" %}">View Stats</a>
                             </li>
                         </ul>
                     </li>
                 {% endif %}
-
-                {% if user.is_staff %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" style="color: white" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Manage Anime
-                        </a>
-                        <ul class="dropdown-menu" style="background-color: #6f2cf5">
-                            <li><a class="dropdown-item" style="color: white" href="#">Add anime</a></li>
-                            <li><a class="dropdown-item" style="color: white" href="#">Delete anime</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
-
             </ul>
             {% if user.is_authenticated %}
                 <form method="post" action="{% url "logout" %}">
