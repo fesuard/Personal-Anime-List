@@ -78,7 +78,7 @@ class UserAnime(models.Model):
     ]
     watch_status = models.CharField(max_length=50, choices=WATCH_STATUS)
     eps_seen = models.IntegerField(default=0)
-    score = models.IntegerField(choices=SCORE)
+    score = models.IntegerField(choices=SCORE, null=True, blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
 

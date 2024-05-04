@@ -51,8 +51,9 @@ def home_view(request):
         scores = UserAnime.objects.filter(user=user).values('score')
         score_list = []
         for score in scores:
-            score_list.append(score['score'])
-        if UserAnime.objects.filter(user=user).exists():
+            if score['score'] is not None:
+                score_list.append(score['score'])
+        if UserAnime.objects.filter(user=user).exists() and len(score_list) > 0:
             avg_score = sum(score_list) / len(score_list)
             animes_in_user_list = UserAnime.objects.filter(user=user).values('anime')
             tags = []
@@ -71,7 +72,7 @@ def home_view(request):
             }
             return render(request, 'animeList/homepage.html', context)
         else:
-            no_message, no_stats = 'No anime added yet', 0
+            no_message, no_stats = 'No anime rated yet', 0
             context = {
                 'random_anime': random_anime,
                 'random_fact': random_fact,
@@ -226,15 +227,21 @@ class AnimeUserUpdateView(UpdateView):
 
 def stats_view(request):
     user = request.user
-    scores = {}
+    scores = []
     for i in range(1, 11):
         scores_grade = UserAnime.objects.filter(user=user, score=i).count()
-        scores.update({f'{i}': scores_grade})
-    tags = UserAnime.objects.filter(user=user).values('anime__tags')
+        scores.append((f'{i}', scores_grade))
+
+    tags_count = {}
+    tags = UserAnime.objects.filter(user=user).values_list('anime__tags__name', flat=True)
+    for tag in tags:
+        tags_count[tag] = tags_count.get(tag, 0) + 1
+    tags_sorted = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:min(len(tags_count), 15)]
+    print(scores)
     statuses = UserAnime.objects.filter(user=user).values('watch_status')
     context = {
         'scores': scores,
-        'tags': tags,
+        'tags': tags_sorted,
         'statuses': statuses,
     }
 

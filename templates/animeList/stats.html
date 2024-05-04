@@ -2,28 +2,72 @@
 {% load static %}
 {% block title %} Stats {% endblock %}
 {% block content %}
-    <!--Load the AJAX API-->
+{#    <!--Load the AJAX API-->#}
+{#    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>#}
+{#    <script type="text/javascript">#}
+{#        google.charts.load('current', {'packages': ['bar']});#}
+{#        google.charts.setOnLoadCallback(drawStuff);#}
+{##}
+{#        function drawStuff() {#}
+{#            var data = new google.visualization.arrayToDataTable([#}
+{#                ['Grade', 'Rated anime'],#}
+{#                ["1", {{ scores.1 }}],#}
+{#                ["2", {{ scores.2 }}],#}
+{#                ["3", {{scores.3}}],#}
+{#                ["4", {{scores.4}}],#}
+{#                ["5", {{scores.5}}],#}
+{#                ["6", {{scores.6}}],#}
+{#                ["7", {{scores.7}}],#}
+{#                ["8", {{scores.8}}],#}
+{#                ["9", {{scores.9}}],#}
+{#                ["10", {{scores.10}}],#}
+{##}
+{#            ]);#}
+{##}
+{#            var options = {#}
+{#                title: 'Grades',#}
+{#                width: 900,#}
+{#                height: 500,#}
+{#                legend: {position: 'none'},#}
+{#                chart: {#}
+{#                    title: 'Grades',#}
+{#                    subtitle: "See what grades you've used"#}
+{#                },#}
+{#                bars: 'horizontal', // Required for Material Bar Charts.#}
+{#                axes: {#}
+{#                    x: {#}
+{#                        0: {side: 'top', label: 'Rated Anime'} // Top x-axis.#}
+{#                    }#}
+{#                },#}
+{#                bar: {groupWidth: "90%"}#}
+{#            };#}
+{##}
+{#            var chart = new google.charts.Bar(document.getElementById('scores_chart'));#}
+{#            chart.draw(data, options);#}
+{#        };#}
+{#    </script>#}
+{#    <br><br>#}
+{#    <div class="col-md-11 col-12" >#}
+{#        <div class="row">#}
+{#            <div style="padding-left: 30px" id="scores_chart"></div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <br><br><br>#}
+        <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['bar']});
         google.charts.setOnLoadCallback(drawStuff);
 
         function drawStuff() {
-            var data = new google.visualization.arrayToDataTable([
-                ['Grade', 'Rated anime'],
-                ["1", {{ scores.1 }}],
-                ["2", {{ scores.2 }}],
-                ["3", {{scores.3}}],
-                ["4", {{scores.4}}],
-                ["5", {{scores.5}}],
-                ["6", {{scores.6}}],
-                ["7", {{scores.7}}],
-                ["8", {{scores.8}}],
-                ["9", {{scores.9}}],
-                ["10", {{scores.10}}],
-
-            ]);
-
+            var dataArray = [['Grade', 'Rated anime']];
+    
+            // Loop through the tags array and add each tag and its corresponding percentage to the data array
+            {% for score in scores %}
+                dataArray.push(["{{ score.0 }}", {{ score.1 }}]);
+            {% endfor %}
+            var data = new google.visualization.arrayToDataTable(dataArray);
+        
             var options = {
                 title: 'Grades',
                 width: 900,
@@ -42,19 +86,58 @@
                 bar: {groupWidth: "90%"}
             };
 
-            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+            var chart = new google.charts.Bar(document.getElementById('scores_chart'));
             chart.draw(data, options);
         };
     </script>
+    <br><br>
+    <div class="col-md-11 col-12" >
+        <div class="row">
+            <div style="padding-left: 50px" id="scores_chart"></div>
+        </div>
+    </div>
+    <br><br><br>
+    
 
-    <!--Div that will hold the pie chart-->
-    <div style="padding-left: 30px" id="top_x_div"></div>
-{#    <p>1: {{ scores.1 }}</p>#}
-{#    <p>2: {{ scores.2 }}</p>#}
-{#    <p>3: {{ scores.3 }}</p>#}
-{#    <p>1: {{ scores.1 }}</p>#}
-{#    <p>1: {{ scores.1 }}</p>#}
-{#    <p>1: {{ scores.1 }}</p>#}
-{#    {{ scores.2 }}#}
-{#    {{ scores.3 }}#}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawStuff);
+
+    function drawStuff() {
+        var dataArray = [['Tags', 'No of anime']];
+
+        // Loop through the tags array and add each tag and its corresponding percentage to the data array
+        {% for tag in tags %}
+            dataArray.push(["{{ tag.0 }}", {{ tag.1 }}]);
+        {% endfor %}
+
+        var data = new google.visualization.arrayToDataTable(dataArray);
+
+        // Define the chart options
+        var options = {
+            width: 900,
+            height: 600,  
+            legend: { position: 'none' },
+            chart: {
+                title: 'Most seen tags',
+                subtitle: 'see your favorite tags' 
+            },
+            axes: {
+                x: {
+                    0: { side: 'top', label: 'Tags'} // Top x-axis.
+                }
+            },
+            bar: { groupWidth: "90%" }
+        };
+
+        // Create a new bar chart
+        var chart = new google.charts.Bar(document.getElementById('tags_chart'));
+
+        // Draw the chart with the data and options
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    };
+</script>
+<div style="padding-left: 50px" id="tags_chart"></div>
+
 {% endblock %}
