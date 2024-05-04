@@ -237,7 +237,6 @@ def stats_view(request):
     for tag in tags:
         tags_count[tag] = tags_count.get(tag, 0) + 1
     tags_sorted = sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:min(len(tags_count), 15)]
-    print(scores)
     statuses = UserAnime.objects.filter(user=user).values('watch_status')
     context = {
         'scores': scores,
