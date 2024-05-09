@@ -18,9 +18,7 @@
                         <p class="card-text"> Tags: </p>
                         <ul class="tags-cell-detail-view">
                             {% for tag in anime.tags.all %}
-{#                                {% if forloop.counter0 < 4 %}#}
-                                    <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a> </span>
-{#                                {% endif %}#}
+                                <span class="tag"><a href="http://localhost:8000/seach_anime/?anime_title=&anime_status=&anime_type=&anime_year=&anime_season=&anime_tags={{ tag }}">{{ tag }}</a> </span>
                             {% endfor %}
                         <br><br>
                         <button class="show-all-btn btn btn-secondary">Show All Tags</button>
@@ -44,7 +42,8 @@
                     </ul>
                     <div>
                         <form action="
-                                {% if user_anime %}{% url 'update-list' user_anime.id %}{% else %}{% url 'create-list' %}?anime_id={{ anime.id }}{% endif %}"
+                                {% if user_anime %}{% url 'update-list' user_anime.id %}{% else %}
+                                {% url 'create-list' %}?anime_id={{ anime.id }}{% endif %}"
                               method="post">
                             {% csrf_token %}
                             {{ user_anime_form.as_p }}

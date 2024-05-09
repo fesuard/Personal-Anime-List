@@ -42,14 +42,6 @@ class UserAnimeUpdateForm(forms.ModelForm):
         model = UserAnime
         fields = ['score', 'eps_seen', 'watch_status']
 
-    # def __init__(self, *args, **kwargs):
-    #     super(UserAnimeUpdateForm, self).__init__(*args, **kwargs)
-    # self.fields['eps_seen'].widget.attrs.update({'class': 'form-control', 'min': '0', 'max': '7'})
-    # print(*args)
-    # print(dict(kwargs))
-    # for k in kwargs.keys():
-    #     print(str(kwargs.get(k)))
-
     def clean(self):
         cleaned_data = super().clean()
         watch_status = cleaned_data.get('watch_status')

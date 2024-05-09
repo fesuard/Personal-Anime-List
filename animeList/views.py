@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import CreateView, UpdateView, TemplateView, ListView, DetailView
-from animeList.models import Anime, Tag, UserAnime
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
+from animeList.models import Anime, UserAnime
 from animeList.forms import UserAnimeForm, UserAnimeUpdateForm
 from django.shortcuts import render
 import random
@@ -21,7 +21,6 @@ def home_view(request):
     # for a in to_delete:
     #     print(f'Deleting {a.id}')
     #     a.delete()
-
     all_animes = Anime.objects.filter(tags__name__in=['family friendly', 'family life']).exclude(picture='').exclude(
         picture='https://raw.githubusercontent.com/manami-project/anime-offline-database/master/pics/no_pic.png')
     obj_to_select = 4
@@ -45,7 +44,7 @@ def home_view(request):
         '"Neon Genesis Evangelion" is a groundbreaking mecha anime series known for its psychological themes and complex narrative.'
     ]
     random_fact = random.choice(fact_list)
-    # The following block of code is for gettings some soft stats as in: the user's
+    # The following block of code is for getting some soft stats as in: the user's
     # avg score, no of animes in list, favorite tags
     if request.user.is_authenticated:
         user = request.user
@@ -110,7 +109,6 @@ class AnimeSearchView(LoginRequiredMixin, ListView):
         adv_search_anime = myFilter.qs
         data['all_anime'] = adv_search_anime[:min(adv_search_anime.count(), 20)]
         data['filters'] = myFilter.form
-        # data['simple_search_anime'] = simple_search_anime
         # randul de mai jos este ca sa ramana scris ce am cautat in bara de search, de asemenea in template a fost adaugat value="{{ q }}
         data['q'] = q
         return data
@@ -136,11 +134,6 @@ class CreateUserAnimeView(LoginRequiredMixin, CreateView):
     model = UserAnime
     form_class = UserAnimeForm
     template_name = 'animeList/user_anime_create.html'
-
-    # success_url = reverse_lazy('home-page')
-
-    # def get_initial(self):
-    #     return {'anime': self.request.GET.get('anime_id', Anime.objects.first().id)}
 
     def get_success_url(self):
         return self.request.META['HTTP_REFERER']

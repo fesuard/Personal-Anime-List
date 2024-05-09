@@ -86,6 +86,7 @@ class AnimeListFilter(django_filters.FilterSet):
         (9, '(9) Great'),
         (10, '(10) Masterpiece')
     ]
+
     # added function for the tags filter so that it won't return the same anime multiple times
     # as a lot of them have tags like "comedy" and "highschool comedy"
     def filter_for_tags(self, queryset, name, value):

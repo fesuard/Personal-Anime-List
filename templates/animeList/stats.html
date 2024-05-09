@@ -1,123 +1,3 @@
-{#{% extends 'base.html' %}#}
-{#{% load static %}#}
-{#{% block title %} Stats {% endblock %}#}
-{#{% block content %}#}
-{#        <!--Load the AJAX API-->#}
-{#    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>#}
-{#    <script type="text/javascript">#}
-{#        google.charts.load('current', {'packages': ['bar']});#}
-{#        google.charts.setOnLoadCallback(drawScoresChart);#}
-{##}
-{#        function drawScoresChart() {#}
-{#            var dataArray = [['Grade', 'Rated anime']];#}
-{#    #}
-{#            // Loop through the tags array and add each tag and its corresponding percentage to the data array#}
-{#            {% for score in scores %}#}
-{#                dataArray.push(["{{ score.0 }}", {{ score.1 }}]);#}
-{#            {% endfor %}#}
-{#            var data = new google.visualization.arrayToDataTable(dataArray);#}
-{#        #}
-{#            var options = {#}
-{#                title: 'Grades',#}
-{#                width: 900,#}
-{#                height: 500,#}
-{#                legend: {position: 'none'},#}
-{#                chart: {#}
-{#                    title: 'Grades',#}
-{#                    subtitle: "See what grades you've used"#}
-{#                },#}
-{#                bars: 'horizontal', // Required for Material Bar Charts.#}
-{#                axes: {#}
-{#                    x: {#}
-{#                        0: {side: 'top', label: 'Rated Anime'} // Top x-axis.#}
-{#                    }#}
-{#                },#}
-{#                bar: {groupWidth: "90%"}#}
-{#            };#}
-{##}
-{#            var chart = new google.charts.Bar(document.getElementById('scores_chart'));#}
-{#            chart.draw(data, options);#}
-{#        };#}
-{#    </script>#}
-{#    <br><br>#}
-{#    <div class="col-md-11 col-12" >#}
-{#        <div class="row">#}
-{#            <div style="padding-left: 50px" id="scores_chart"></div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <br><br><br>#}
-{#    #}
-{##}
-{#    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>#}
-{#    <script type="text/javascript">#}
-{#    google.charts.load('current', {'packages':['bar']});#}
-{#    google.charts.setOnLoadCallback(drawStuff);#}
-{##}
-{#    function drawStuff() {#}
-{#        var dataArray = [['Tags', 'No of anime']];#}
-{##}
-{#        // Loop through the tags array and add each tag and its corresponding percentage to the data array#}
-{#        {% for tag in tags %}#}
-{#            dataArray.push(["{{ tag.0 }}", {{ tag.1 }}]);#}
-{#        {% endfor %}#}
-{##}
-{#        var data = new google.visualization.arrayToDataTable(dataArray);#}
-{##}
-{#        // Define the chart options#}
-{#        var options = {#}
-{#            width: 900,#}
-{#            height: 600,  #}
-{#            legend: { position: 'none' },#}
-{#            chart: {#}
-{#                title: 'Most seen tags',#}
-{#                subtitle: 'see your favorite tags' #}
-{#            },#}
-{#            axes: {#}
-{#                x: {#}
-{#                    0: { side: 'top', label: 'Tags'} // Top x-axis.#}
-{#                }#}
-{#            },#}
-{#            bar: { groupWidth: "90%" }#}
-{#        };#}
-{##}
-{#        // Create a new bar chart#}
-{#        var chart = new google.charts.Bar(document.getElementById('tags_chart'));#}
-{##}
-{#        // Draw the chart with the data and options#}
-{#        chart.draw(data, google.charts.Bar.convertOptions(options));#}
-{#    }#}
-{#    </script>#}
-{#    <div style="padding-left: 50px" id="tags_chart"></div>#}
-{#    #}
-{#    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>#}
-{#    <script type="text/javascript">#}
-{#      google.charts.load('current', {'packages':['corechart']});#}
-{#      google.charts.setOnLoadCallback(drawChart);#}
-{##}
-{#      function drawChart() {#}
-{##}
-{#        var data = google.visualization.arrayToDataTable([#}
-{#          ['Task', 'Hours per Day'],#}
-{#          ['Work',     11],#}
-{#          ['Eat',      2],#}
-{#          ['Commute',  2],#}
-{#          ['Watch TV', 2],#}
-{#          ['Sleep',    7]#}
-{#        ]);#}
-{##}
-{#        var options = {#}
-{#          title: 'My Daily Activities'#}
-{#        };#}
-{##}
-{#        var chart = new google.visualization.PieChart(document.getElementById('piechart'));#}
-{##}
-{#        chart.draw(data, options);#}
-{#      }#}
-{#    </script>#}
-{#    <div id="piechart" style="width: 900px; height: 500px;"></div>#}
-{##}
-{#{% endblock %}#}
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Stats {% endblock %}
@@ -196,14 +76,7 @@
         google.charts.setOnLoadCallback(drawPieChart);
 
         function drawPieChart() {
-            {#var data = google.visualization.arrayToDataTable([#}
-            {#    ['Task', 'Hours per Day'],#}
-            {#    ['Work',     11],#}
-            {#    ['Eat',      2],#}
-            {#    ['Commute',  2],#}
-            {#    ['Watch TV', 2],#}
-            {#    ['Sleep',    7]#}
-            {#]);#}
+
             
             var dataArray = [['Watch status', 'Anime']]
 
@@ -233,5 +106,5 @@
 
     <div style="padding-left: 50px" id="tags_chart"></div>
     
-    <div id="piechart" style="width: 1000px; height: 600px;"></div>
+    <div id="piechart" style="padding-left: 50px; width: 1000px; height: 600px;"></div>
 {% endblock %}

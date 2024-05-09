@@ -1,7 +1,5 @@
 from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.db import models
-from django.utils import timezone
-# from userManagement.managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
